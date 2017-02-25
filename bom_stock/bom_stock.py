@@ -70,7 +70,7 @@ class product_product(orm.Model):
                 # get the minimal number of items we can produce with them
                 for line in bom.bom_lines:
                     prod_min_quantity = 0.0
-                    bom_qty = line.product_id[stock_field] # expressed in product UOM
+                    bom_qty = line.product_id[stock_field] + line.product_id['suppliers_immediately_usable_qty']#quick fix for pack intercompany stock => to remove when we use one product for all companies...
                     # the reference stock of the component must be greater
                     # than the quantity of components required to
                     # build the bom
